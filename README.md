@@ -44,3 +44,4 @@ kubectl -n webapp get deployments,services
 
 ## References
 * [Get started with Flux v2](https://toolkit.fluxcd.io/get-started/)
+* [Setup Ingress with kind](https://kind.sigs.k8s.io/docs/user/ingress/#using-ingress)
