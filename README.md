@@ -41,3 +41,6 @@ watch flux get kustomizations
 kubectl -n webapp get deployments,services
 
 ```
+
+## References
+* [Get started with Flux v2](https://toolkit.fluxcd.io/get-started/)
