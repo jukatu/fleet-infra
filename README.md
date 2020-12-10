@@ -28,17 +28,18 @@ EOF
 
 kubectl cluster-info --context kind-staging
 
-flux check --pre
+flux check --pre --context kind-staging
 
 flux bootstrap github \
   --owner=$GITHUB_USER \
   --repository=fleet-infra \
   --branch=main \
   --path=staging-cluster \
-  --personal
+  --personal \
+  --context kind-staging
 
 
-watch flux get kustomizations
+watch flux get kustomizations --context kind-staging
 
 kubectl --context kind-staging -n webapp get deployments,services
 
@@ -72,7 +73,7 @@ EOF
 
 kubectl cluster-info --context kind-production
 
-flux check --pre
+flux check --pre --context kind-production
 ```
 
 ## References
