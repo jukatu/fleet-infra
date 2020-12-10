@@ -75,6 +75,13 @@ kubectl cluster-info --context kind-production
 
 flux check --pre --context kind-production
 
+flux bootstrap github \
+  --owner=$GITHUB_USER \
+  --repository=fleet-infra \
+  --path=prod-cluster \
+  --context kind-production \
+  --personal
+
 # --branch=master only to test config
 # in actual production something like --tag-semver=">=4.0.0 <4.0.2" 
 flux create source git webapp \
