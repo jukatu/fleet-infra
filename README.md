@@ -75,10 +75,11 @@ kubectl cluster-info --context kind-production
 
 flux check --pre --context kind-production
 
+# --branch=master only to test config
+# in actual production something like --tag-semver=">=4.0.0 <4.0.2" 
 flux create source git webapp \
   --url=https://github.com/jukatu/podinfo \
-  --branch=master \ # only to test config. For actual production use --tag-semver below
-  # --tag-semver=">=4.0.0 <4.0.2" \ 
+  --branch=master
   --interval=30s \
   --export > ./prod-cluster/webapp-source.yaml
 
