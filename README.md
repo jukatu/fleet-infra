@@ -79,7 +79,7 @@ flux check --pre --context kind-production
 # in actual production something like --tag-semver=">=4.0.0 <4.0.2" 
 flux create source git webapp \
   --url=https://github.com/jukatu/podinfo \
-  --branch=master
+  --branch=master \
   --interval=30s \
   --export > ./prod-cluster/webapp-source.yaml
 
