@@ -7,6 +7,7 @@ metadata:
 spec:
   interval: 30s
   ref:
-    semver: '>=4.0.0 <4.0.2'
+    branch: master
+    # semver: '>=4.0.0 <4.0.2'
   url: https://github.com/jukatu/podinfo
 
