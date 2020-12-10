@@ -4,6 +4,7 @@
 export GITHUB_TOKEN=<your-token>
 export GITHUB_USER=<your-username>
 
+# Create an Ingress ready cluster
 cat <<EOF | kind create cluster --name staging --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -25,6 +26,13 @@ nodes:
 EOF
 
 kubectl cluster-info --context kind-staging
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
+
+kubectl wait --namespace ingress-nginx \
+  --for=condition=ready pod \
+  --selector=app.kubernetes.io/component=controller \
+  --timeout=90s
 
 flux check --pre
 
