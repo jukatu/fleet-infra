@@ -74,6 +74,25 @@ EOF
 kubectl cluster-info --context kind-production
 
 flux check --pre --context kind-production
+
+flux create source git webapp \
+  --url=https://github.com/jukatu/podinfo \
+  --branch=master \ # only to test config. For actual production use --tag-semver below
+  # --tag-semver=">=4.0.0 <4.0.2" \ 
+  --interval=30s \
+  --export > ./prod-cluster/webapp-source.yaml
+
+flux create kustomization webapp \
+  --source=webapp \
+  --path="./deploy/overlays/production" \
+  --prune=true \
+  --validation=client \
+  --interval=10m \
+  --health-check="Deployment/frontend.production" \
+  --health-check="Deployment/backend.production" \
+  --health-check-timeout=2m \
+  --export > ./prod-cluster/webapp-production.yaml
+
 ```
 
 ## References
